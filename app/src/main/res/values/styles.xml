@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomTextViewStyle" parent="Base.Theme.CapstoneNgaksoro">
+        <item name="android:fontFamily">@font/poppinslight</item>
+    </style>
+
+</resources>

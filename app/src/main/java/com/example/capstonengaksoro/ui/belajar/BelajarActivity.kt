@@ -1,16 +1,27 @@
 package com.example.capstonengaksoro.ui.belajar
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.capstonengaksoro.R
+import com.example.capstonengaksoro.data.response.ImagesItem
 import com.example.capstonengaksoro.databinding.ActivityBelajarBinding
 import com.example.capstonengaksoro.ui.ViewModelFactory
+import com.example.capstonengaksoro.utils.changeActivity
 import com.example.capstonengaksoro.utils.checkInternetConnection
 import com.example.capstonengaksoro.utils.networkStatusLiveData
 import com.example.capstonengaksoro.utils.registerNetworkCallback
@@ -63,14 +74,37 @@ class BelajarActivity : AppCompatActivity() {
 
         networkStatusLiveData.observe(this, { isConnected ->
             if (isConnected) {
-
                 // Koneksi internet terhubung
                 // Lakukan tindakan yang sesuai
                 belajarViewModel.getData().observe(this, { response ->
                     if (response != null) {
                         showLoading(false)
                         showLostConnectionAnim(false)
-                        val adapter = BelajarAdapter(response.images)
+                        val adapter = BelajarAdapter(response.images, object : BelajarAdapter.OnItemClickCallback {
+                            override fun onItemClick(data: ImagesItem) {
+                                val dialogBuilder = AlertDialog.Builder(this@BelajarActivity)
+                                val inflater = LayoutInflater.from(this@BelajarActivity)
+                                val dialogView = inflater.inflate(R.layout.popup_layout, null)
+                                dialogBuilder.setView(dialogView)
+
+                                val photoViewPopup = dialogView.findViewById<ImageView>(R.id.photoViewPopup)
+                                Glide.with(this@BelajarActivity)
+                                    .asGif()
+                                    .load(data.gif)
+                                    .into(photoViewPopup)
+
+                                val textTitle = dialogView.findViewById<TextView>(R.id.textTitle)
+
+                                textTitle.text = data.text.uppercase()
+
+                                val alertDialog = dialogBuilder.create()
+                                alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                alertDialog.show()
+
+                                Toast.makeText(this@BelajarActivity, "You Clicked ${data.text}", Toast.LENGTH_SHORT).show()
+                            }
+                        })
+
                         binding.recyclerView.adapter = adapter
                     }
                 })

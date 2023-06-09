@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("jowo.json")
+    @GET("assets")
     fun getData(): Call<ResponseNgaksoro>
 
 }

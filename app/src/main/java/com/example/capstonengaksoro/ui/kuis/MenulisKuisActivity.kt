@@ -97,9 +97,9 @@ class MenulisKuisActivity : AppCompatActivity() {
         val contentValues = ContentValues().apply {
             put(
                 MediaStore.MediaColumns.DISPLAY_NAME,
-                "my_drawing_${System.currentTimeMillis()}.jpg"
+                "my_drawing_${System.currentTimeMillis()}.png"
             )
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
             put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
         }
 
@@ -110,7 +110,7 @@ class MenulisKuisActivity : AppCompatActivity() {
             try {
                 val outputStream: OutputStream? = resolver.openOutputStream(it)
                 outputStream?.use { stream ->
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
                 }
                 outputStream?.close()
 

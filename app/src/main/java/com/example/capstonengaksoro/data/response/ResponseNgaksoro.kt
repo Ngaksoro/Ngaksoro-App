@@ -13,6 +13,9 @@ data class ImagesItem(
     @field:SerializedName("image")
     val image: String,
 
+    @field:SerializedName("gif")
+    val gif: String,
+
     @field:SerializedName("text")
     val text: String
 )

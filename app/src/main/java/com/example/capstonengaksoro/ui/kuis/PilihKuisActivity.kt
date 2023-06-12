@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.example.capstonengaksoro.R
 import com.example.capstonengaksoro.databinding.ActivityPilihKuisBinding
+import com.example.capstonengaksoro.ui.kuis.menulis.MenulisKuisActivity
 import com.example.capstonengaksoro.utils.changeActivity
 
 class PilihKuisActivity : AppCompatActivity() {

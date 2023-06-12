@@ -19,3 +19,9 @@ data class ImagesItem(
     @field:SerializedName("text")
     val text: String
 )
+
+data class ResponseUploadImage(
+
+    @field:SerializedName("result")
+    val result: String
+)

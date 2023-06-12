@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.capstonengaksoro.data.remote.ApiService
 import com.example.capstonengaksoro.data.response.ResponseNgaksoro
+import com.example.capstonengaksoro.data.response.ResponseUploadImage
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +39,32 @@ class NgaksoroRepository private constructor(
             Log.e(TAG, e.message.toString())
         }
         return data
+    }
+
+    fun uploadImage(file: MultipartBody.Part)  : LiveData<ResponseUploadImage>{
+        val data = MutableLiveData<ResponseUploadImage>()
+        val client = apiService.uploadImage(file)
+        client.enqueue(object : Callback<ResponseUploadImage> {
+            override fun onResponse(
+                call: Call<ResponseUploadImage>,
+                response: Response<ResponseUploadImage>
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        data.value = response.body()
+                    } else {
+                        data.value = response.body()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseUploadImage>, t: Throwable) {
+                Log.e(TAG, "OnFailure : ${t.message.toString()}")
+            }
+        })
+        return data
+
     }
 
 

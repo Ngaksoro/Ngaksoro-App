@@ -23,7 +23,7 @@
             android:name=".ui.kuis.MembacaKuisActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.kuis.MenulisKuisActivity"
+            android:name=".ui.kuis.menulis.MenulisKuisActivity"
             android:exported="false" />
         <activity
             android:name=".ui.kuis.PilihKuisActivity"

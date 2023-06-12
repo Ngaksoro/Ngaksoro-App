@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.capstonengaksoro.data.di.Injection
 import com.example.capstonengaksoro.data.repository.NgaksoroRepository
 import com.example.capstonengaksoro.ui.belajar.BelajarViewModel
+import com.example.capstonengaksoro.ui.kuis.menulis.MenulisKuisViewModel
 
 class ViewModelFactory private constructor(private val ngaksoroRepository: NgaksoroRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -13,6 +14,8 @@ class ViewModelFactory private constructor(private val ngaksoroRepository: Ngaks
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(BelajarViewModel::class.java)) {
             return BelajarViewModel(ngaksoroRepository) as T
+        } else if (modelClass.isAssignableFrom(MenulisKuisViewModel::class.java)) {
+            return MenulisKuisViewModel(ngaksoroRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

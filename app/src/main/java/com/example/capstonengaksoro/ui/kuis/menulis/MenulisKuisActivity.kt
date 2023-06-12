@@ -1,30 +1,46 @@
-package com.example.capstonengaksoro.ui.kuis
+package com.example.capstonengaksoro.ui.kuis.menulis
 
 import android.Manifest
+import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import com.example.capstonengaksoro.R
 import com.example.capstonengaksoro.databinding.ActivityMenulisKuisBinding
-import com.example.capstonengaksoro.ui.home.HomeActivity
-import com.example.capstonengaksoro.utils.changeActivity
+import com.example.capstonengaksoro.ui.ViewModelFactory
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.ByteArrayOutputStream
 import java.io.OutputStream
 
 class MenulisKuisActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMenulisKuisBinding
+
+    private val factory: ViewModelFactory by lazy {
+        ViewModelFactory.getInstance(this.application)
+    }
+
+    private val viewModel: MenulisKuisViewModel by viewModels {
+        factory
+    }
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +99,10 @@ class MenulisKuisActivity : AppCompatActivity() {
         }
 
         val bitmap = createBitmapFromView(binding.drawingView)
+        // Upload the image
+        val file = createMultipartFromBitmap(bitmap)
+        uploadImage(file)
+
         saveImageToGallery(bitmap)
     }
 
@@ -114,12 +134,11 @@ class MenulisKuisActivity : AppCompatActivity() {
                 }
                 outputStream?.close()
 
-                // Show a success message or perform any other operations
-                Toast.makeText(this, "Save Image Sukses", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 // Handle the exception
                 Toast.makeText(this, "Save Error ${e.message.toString()}", Toast.LENGTH_SHORT)
                     .show()
+                Log.d(TAG, "Save Error ${e.message.toString()}")
             }
         }
     }
@@ -137,7 +156,32 @@ class MenulisKuisActivity : AppCompatActivity() {
         return bitmap
     }
 
+    private fun uploadImage(file: MultipartBody.Part) {
+        viewModel.uploadImage(file).observe(this, { response ->
+            response?.let {
+                if (it.result != null) {
+                    Toast.makeText(
+                        this@MenulisKuisActivity,
+                        "Aksara Merupakan: ${it.result}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    Log.d(TAG, it.result)
+                }
+            }
+        })
+    }
+
+    private fun createMultipartFromBitmap(bitmap: Bitmap): MultipartBody.Part {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val requestBody =
+            RequestBody.create("image/png".toMediaTypeOrNull(), byteArrayOutputStream.toByteArray())
+        return MultipartBody.Part.createFormData("file", "image.png", requestBody)
+    }
+
+
     companion object {
         private const val WRITE_STORAGE_PERMISSION_REQUEST = 1
+        private val TAG = MenulisKuisActivity::class.java.simpleName
     }
 }

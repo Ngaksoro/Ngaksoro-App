@@ -17,10 +17,13 @@
         android:theme="@style/Theme.CapstoneNgaksoro"
         tools:targetApi="31">
         <activity
-            android:name=".ui.belajar.BelajarAnimationActivity"
+            android:name=".ui.kuis.membacafinish.MembacaKuisFinishActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.kuis.MembacaKuisActivity"
+            android:name=".ui.kuis.menulis.MenulisBenarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kuis.membaca.MembacaKuisActivity"
             android:exported="false" />
         <activity
             android:name=".ui.kuis.menulis.MenulisKuisActivity"

@@ -1,11 +1,11 @@
 package com.example.capstonengaksoro.data.remote
 
 import com.example.capstonengaksoro.data.response.ResponseNgaksoro
+import com.example.capstonengaksoro.data.response.ResponseSoalItem
 import com.example.capstonengaksoro.data.response.ResponseUploadImage
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -19,6 +19,12 @@ interface ApiService {
     @Multipart
     @POST("upload")
     fun uploadImage(
-        @Part file: MultipartBody.Part
+        @Part file: MultipartBody.Part,
+        @Part("aksara") aksara: RequestBody
     ): Call<ResponseUploadImage>
+
+    @GET("soal")
+    fun getSoal() : Call<List<ResponseSoalItem>>
+
+
 }

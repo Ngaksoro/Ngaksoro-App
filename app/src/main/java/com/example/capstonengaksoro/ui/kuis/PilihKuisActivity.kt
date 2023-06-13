@@ -1,10 +1,11 @@
 package com.example.capstonengaksoro.ui.kuis
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.example.capstonengaksoro.R
 import com.example.capstonengaksoro.databinding.ActivityPilihKuisBinding
+import com.example.capstonengaksoro.ui.kuis.membaca.MembacaKuisActivity
 import com.example.capstonengaksoro.ui.kuis.menulis.MenulisKuisActivity
 import com.example.capstonengaksoro.utils.changeActivity
 

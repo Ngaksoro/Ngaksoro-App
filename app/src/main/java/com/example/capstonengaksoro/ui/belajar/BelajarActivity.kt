@@ -1,6 +1,5 @@
 package com.example.capstonengaksoro.ui.belajar
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +19,6 @@ import com.example.capstonengaksoro.R
 import com.example.capstonengaksoro.data.response.ImagesItem
 import com.example.capstonengaksoro.databinding.ActivityBelajarBinding
 import com.example.capstonengaksoro.ui.ViewModelFactory
-import com.example.capstonengaksoro.utils.changeActivity
 import com.example.capstonengaksoro.utils.checkInternetConnection
 import com.example.capstonengaksoro.utils.networkStatusLiveData
 import com.example.capstonengaksoro.utils.registerNetworkCallback

@@ -8,7 +8,6 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.capstonengaksoro.ui.belajar.BelajarActivity
 
 private val _networkStatusLiveData = MutableLiveData<Boolean>()
 val networkStatusLiveData: LiveData<Boolean>

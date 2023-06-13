@@ -1,16 +1,13 @@
 package com.example.capstonengaksoro.ui.kuis.menulis
 
 import android.Manifest
-import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -20,10 +17,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.capstonengaksoro.R
 import com.example.capstonengaksoro.databinding.ActivityMenulisKuisBinding
 import com.example.capstonengaksoro.ui.ViewModelFactory
-import okhttp3.MediaType
+import com.example.capstonengaksoro.utils.changeActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -31,6 +29,7 @@ import java.io.ByteArrayOutputStream
 import java.io.OutputStream
 
 class MenulisKuisActivity : AppCompatActivity() {
+
 
     private lateinit var binding: ActivityMenulisKuisBinding
 
@@ -41,6 +40,8 @@ class MenulisKuisActivity : AppCompatActivity() {
     private val viewModel: MenulisKuisViewModel by viewModels {
         factory
     }
+
+    private lateinit var aksaraText: String
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +56,17 @@ class MenulisKuisActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.back_foward)
         // showing the back button in action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+        viewModel.aksaraJawa.observe(this, { aksaras ->
+            // Generate a random index
+            val randomIndex = (0 until aksaras.size).random()
+
+            // Access the random aksara from the list
+            aksaraText = aksaras[randomIndex]
+            binding.pertanyaanAksara.text = aksaraText
+        })
+
 
 
         binding.hapusBtn.setOnClickListener {
@@ -130,7 +142,7 @@ class MenulisKuisActivity : AppCompatActivity() {
             try {
                 val outputStream: OutputStream? = resolver.openOutputStream(it)
                 outputStream?.use { stream ->
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 80, stream)
                 }
                 outputStream?.close()
 
@@ -157,18 +169,45 @@ class MenulisKuisActivity : AppCompatActivity() {
     }
 
     private fun uploadImage(file: MultipartBody.Part) {
-        viewModel.uploadImage(file).observe(this, { response ->
-            response?.let {
-                if (it.result != null) {
-                    Toast.makeText(
-                        this@MenulisKuisActivity,
-                        "Aksara Merupakan: ${it.result}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    Log.d(TAG, it.result)
+        showProgresBar(true)
+        Toast.makeText(
+            this@MenulisKuisActivity,
+            "Please Wait Processing Image ...",
+            Toast.LENGTH_SHORT
+        ).show()
+        viewModel.uploadImage(file, binding.pertanyaanAksara.text.toString())
+            .observe(this, { response ->
+                response?.let {
+                    if (it.result != null) {
+                        showProgresBar(false)
+                        Toast.makeText(
+                            this@MenulisKuisActivity,
+                            "Aksara Merupakan: ${it.result}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        if (it.result.equals("true")) {
+                            changeActivity(this, MenulisBenarActivity::class.java)
+                            finish()
+                        } else {
+                            Toast.makeText(
+                                this@MenulisKuisActivity,
+                                "Tulisan Salah",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                    }
                 }
-            }
-        })
+            })
+    }
+
+    private fun showProgresBar(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressbar.visibility = View.VISIBLE
+        } else {
+            binding.progressbar.visibility = View.GONE
+        }
+
     }
 
     private fun createMultipartFromBitmap(bitmap: Bitmap): MultipartBody.Part {

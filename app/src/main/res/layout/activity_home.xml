@@ -1,177 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeActivity">
+    android:paddingBottom="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeActivity">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/shadow_bg_belajar_rectangle"
-        android:elevation="5dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/rectangle"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shadow_bg_belajar_rectangle"
+            android:elevation="5dp"
             android:gravity="center"
-            android:text="@string/home_title"
-            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_title"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_ngaksoro" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:text="@string/home_title"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/modul_belajar_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        android:focusable="true">
 
-        <RelativeLayout
-            android:id="@+id/modul_belajar"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/modul_belajar_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-            <ImageView
-                android:id="@+id/rectangle_modul_belajar"
-                android:layout_width="50dp"
+            <RelativeLayout
+                android:id="@+id/modul_belajar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_button" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title_modul_belajar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_toEndOf="@+id/rectangle_modul_belajar"
-                android:text="@string/modul_belajar"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                <ImageView
+                    android:id="@+id/rectangle_modul_belajar"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_button" />
 
-            <TextView
-                android:id="@+id/title2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="38dp"
-                android:layout_marginEnd="8dp"
-                android:layout_toEndOf="@+id/rectangle_modul_belajar"
-                android:text="@string/modul_belajar_2"
-                android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/title_modul_belajar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toEndOf="@+id/rectangle_modul_belajar"
+                    android:text="@string/modul_belajar"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-
-            <ImageView
-                android:id="@+id/arrow_image_modul_belajar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/arrow_forward" />
+                <TextView
+                    android:id="@+id/title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toEndOf="@+id/rectangle_modul_belajar"
+                    android:text="@string/modul_belajar_2"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
 
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/arrow_image_modul_belajar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_forward" />
 
-    </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/kuis_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/modul_belajar_card"
-        app:layout_constraintTop_toBottomOf="@+id/modul_belajar_card"
-        android:focusable="true">
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/kuis"
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kuis_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/modul_belajar_card"
+            app:layout_constraintTop_toBottomOf="@+id/modul_belajar_card">
 
-            <ImageView
-                android:id="@+id/rectangle_kuis"
-                android:layout_width="50dp"
+            <RelativeLayout
+                android:id="@+id/kuis"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_button" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title_kuis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_toEndOf="@+id/rectangle_kuis"
-                android:text="@string/test_quiz"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                <ImageView
+                    android:id="@+id/rectangle_kuis"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_button" />
 
-            <TextView
-                android:id="@+id/title2_kuis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="38dp"
-                android:layout_marginEnd="8dp"
-                android:layout_toEndOf="@+id/rectangle_kuis"
-                android:text="@string/modul_belajar_2"
-                android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/title_kuis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toEndOf="@+id/rectangle_kuis"
+                    android:text="@string/test_quiz"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-
-            <ImageView
-                android:id="@+id/arrow_image_kuis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/arrow_forward" />
+                <TextView
+                    android:id="@+id/title2_kuis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toEndOf="@+id/rectangle_kuis"
+                    android:text="@string/modul_belajar_2"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
 
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/arrow_image_kuis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/arrow_forward" />
 
-    </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -181,6 +181,11 @@ class MenulisKuisActivity : AppCompatActivity() {
                     if (it.result != null) {
                         showProgresBar(false)
                         if (it.result.equals("true")) {
+                            Toast.makeText(
+                                this@MenulisKuisActivity,
+                                "Tulisan Benar",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             changeActivity(this, MenulisBenarActivity::class.java)
                             finish()
                         } else {

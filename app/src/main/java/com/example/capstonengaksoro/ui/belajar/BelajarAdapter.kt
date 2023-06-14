@@ -11,7 +11,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.capstonengaksoro.R
 import com.example.capstonengaksoro.data.response.ImagesItem
 
-class BelajarAdapter(private val data: List<ImagesItem>, private val onItemClickCallback: OnItemClickCallback) :
+class BelajarAdapter(
+    private val data: List<ImagesItem>,
+    private val onItemClickCallback: OnItemClickCallback
+) :
     RecyclerView.Adapter<BelajarAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {

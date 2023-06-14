@@ -44,9 +44,9 @@
                 android:id="@+id/arrow_image_membaca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:padding="16dp"
                 android:src="@drawable/arrow_forward" />
 
 
@@ -60,9 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_weight="1"
-        android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:minHeight="48dp"
         app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,9 +93,9 @@
                 android:id="@+id/arrow_image_menulis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:padding="16dp"
                 android:src="@drawable/arrow_forward" />
 
 

@@ -20,7 +20,7 @@ class MenulisKuisViewModel(private val ngaksoroRepository: NgaksoroRepository) :
     }
 
 
-    fun uploadImage(file: MultipartBody.Part, aksara: String) : LiveData<ResponseUploadImage> {
+    fun uploadImage(file: MultipartBody.Part, aksara: String): LiveData<ResponseUploadImage> {
         return ngaksoroRepository.uploadImage(file, aksara)
     }
 

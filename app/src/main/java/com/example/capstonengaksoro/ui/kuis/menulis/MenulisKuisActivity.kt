@@ -24,7 +24,7 @@ import com.example.capstonengaksoro.ui.ViewModelFactory
 import com.example.capstonengaksoro.utils.changeActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
 
@@ -214,7 +214,8 @@ class MenulisKuisActivity : AppCompatActivity() {
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         val requestBody =
-            RequestBody.create("image/png".toMediaTypeOrNull(), byteArrayOutputStream.toByteArray())
+            byteArrayOutputStream.toByteArray()
+                .toRequestBody("image/png".toMediaTypeOrNull(), 0, content.size)
         return MultipartBody.Part.createFormData("file", "image.png", requestBody)
     }
 

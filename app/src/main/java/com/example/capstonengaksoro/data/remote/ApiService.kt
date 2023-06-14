@@ -24,7 +24,7 @@ interface ApiService {
     ): Call<ResponseUploadImage>
 
     @GET("soal")
-    fun getSoal() : Call<List<ResponseSoalItem>>
+    fun getSoal(): Call<List<ResponseSoalItem>>
 
 
 }

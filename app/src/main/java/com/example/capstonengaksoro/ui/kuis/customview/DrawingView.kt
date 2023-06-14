@@ -38,10 +38,12 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
                 path.moveTo(x, y)
                 invalidate()
             }
+
             MotionEvent.ACTION_MOVE -> {
                 path.lineTo(x, y)
                 invalidate()
             }
+
             MotionEvent.ACTION_UP -> {
                 path.lineTo(x, y)
                 invalidate()

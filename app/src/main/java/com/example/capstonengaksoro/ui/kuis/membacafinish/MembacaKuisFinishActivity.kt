@@ -38,18 +38,17 @@ class MembacaKuisFinishActivity : AppCompatActivity() {
             finish()
         }
 
-        viewModel.getNilai().observe(this) {nilai ->
+        viewModel.getNilai().observe(this) { nilai ->
             binding.tvJumlahNilai.text = nilai.toString()
             nilaiQuiz = nilai
 
         }
 
 
-        viewModel.getJumlahJawabanBenar().observe(this) {benar ->
+        viewModel.getJumlahJawabanBenar().observe(this) { benar ->
             binding.tvJawabanBenar.text = benar.toInt().toString()
 
         }
-
 
 
     }

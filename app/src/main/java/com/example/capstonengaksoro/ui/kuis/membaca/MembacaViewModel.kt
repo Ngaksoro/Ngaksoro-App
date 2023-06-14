@@ -34,7 +34,7 @@ class MembacaViewModel(private val ngaksoroRepository: NgaksoroRepository) : Vie
         _counterID.value = _counterID.value!! + 1
     }
 
-    fun hitungNilai(jumlahJawabanBenar: Double, jumlahSoal: Double) : LiveData<Double> {
+    fun hitungNilai(jumlahJawabanBenar: Double, jumlahSoal: Double): LiveData<Double> {
         return ngaksoroRepository.hitungNilai(jumlahJawabanBenar, jumlahSoal)
     }
 

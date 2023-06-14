@@ -77,30 +77,38 @@ class BelajarActivity : AppCompatActivity() {
                     if (response != null) {
                         showLoading(false)
                         showLostConnectionAnim(false)
-                        val adapter = BelajarAdapter(response.images, object : BelajarAdapter.OnItemClickCallback {
-                            override fun onItemClick(data: ImagesItem) {
-                                val dialogBuilder = AlertDialog.Builder(this@BelajarActivity)
-                                val inflater = LayoutInflater.from(this@BelajarActivity)
-                                val dialogView = inflater.inflate(R.layout.popup_layout, null)
-                                dialogBuilder.setView(dialogView)
+                        val adapter = BelajarAdapter(
+                            response.images,
+                            object : BelajarAdapter.OnItemClickCallback {
+                                override fun onItemClick(data: ImagesItem) {
+                                    val dialogBuilder = AlertDialog.Builder(this@BelajarActivity)
+                                    val inflater = LayoutInflater.from(this@BelajarActivity)
+                                    val dialogView = inflater.inflate(R.layout.popup_layout, null)
+                                    dialogBuilder.setView(dialogView)
 
-                                val photoViewPopup = dialogView.findViewById<ImageView>(R.id.photoViewPopup)
-                                Glide.with(this@BelajarActivity)
-                                    .asGif()
-                                    .load(data.gif)
-                                    .into(photoViewPopup)
+                                    val photoViewPopup =
+                                        dialogView.findViewById<ImageView>(R.id.photoViewPopup)
+                                    Glide.with(this@BelajarActivity)
+                                        .asGif()
+                                        .load(data.gif)
+                                        .into(photoViewPopup)
 
-                                val textTitle = dialogView.findViewById<TextView>(R.id.textTitle)
+                                    val textTitle =
+                                        dialogView.findViewById<TextView>(R.id.textTitle)
 
-                                textTitle.text = data.text.uppercase()
+                                    textTitle.text = data.text.uppercase()
 
-                                val alertDialog = dialogBuilder.create()
-                                alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                                alertDialog.show()
+                                    val alertDialog = dialogBuilder.create()
+                                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                    alertDialog.show()
 
-                                Toast.makeText(this@BelajarActivity, "You Clicked ${data.text}", Toast.LENGTH_SHORT).show()
-                            }
-                        })
+                                    Toast.makeText(
+                                        this@BelajarActivity,
+                                        "You Clicked ${data.text}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            })
 
                         binding.recyclerView.adapter = adapter
                     }
@@ -124,6 +132,7 @@ class BelajarActivity : AppCompatActivity() {
                 onBackPressed()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

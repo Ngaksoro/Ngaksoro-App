@@ -19,11 +19,11 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.home_activity)
 
         binding.modulBelajarCard.setOnClickListener {
-           changeActivity(this, BelajarActivity::class.java)
+            changeActivity(this, BelajarActivity::class.java)
         }
 
         binding.kuisCard.setOnClickListener {
-            changeActivity(this,PilihKuisActivity::class.java)
+            changeActivity(this, PilihKuisActivity::class.java)
         }
     }
 }

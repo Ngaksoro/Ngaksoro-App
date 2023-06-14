@@ -20,7 +20,7 @@ class ViewModelFactory private constructor(private val ngaksoroRepository: Ngaks
             return MenulisKuisViewModel(ngaksoroRepository) as T
         } else if (modelClass.isAssignableFrom(MembacaViewModel::class.java)) {
             return MembacaViewModel(ngaksoroRepository) as T
-        }else if (modelClass.isAssignableFrom(MembacaFinishViewModel::class.java)) {
+        } else if (modelClass.isAssignableFrom(MembacaFinishViewModel::class.java)) {
             return MembacaFinishViewModel(ngaksoroRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

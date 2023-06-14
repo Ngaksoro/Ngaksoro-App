@@ -10,7 +10,7 @@ import com.example.capstonengaksoro.data.response.ResponseSoalItem
 import com.example.capstonengaksoro.data.response.ResponseUploadImage
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +23,6 @@ class NgaksoroRepository private constructor(
 
     private val _jawabanBenar = MutableLiveData<Double>()
     val jawabanBenar: LiveData<Double> = _jawabanBenar
-
 
 
     fun getDataNgaksoro(): LiveData<ResponseNgaksoro> {
@@ -53,7 +52,7 @@ class NgaksoroRepository private constructor(
 
     fun uploadImage(file: MultipartBody.Part, aksara: String): LiveData<ResponseUploadImage> {
         val data = MutableLiveData<ResponseUploadImage>()
-        val requestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), aksara)
+        val requestBody = aksara.toRequestBody("text/plain".toMediaTypeOrNull())
         val client = apiService.uploadImage(file, requestBody)
         client.enqueue(object : Callback<ResponseUploadImage> {
             override fun onResponse(
@@ -106,7 +105,7 @@ class NgaksoroRepository private constructor(
         return data
     }
 
-    fun hitungNilai(jumlahJawabanBenar: Double, jumlahSoal: Double ) : LiveData<Double> {
+    fun hitungNilai(jumlahJawabanBenar: Double, jumlahSoal: Double): LiveData<Double> {
         val nilai = MutableLiveData<Double>()
         _jawabanBenar.value = jumlahJawabanBenar
         nilai.value = (jumlahJawabanBenar / jumlahSoal) * 100
@@ -115,11 +114,9 @@ class NgaksoroRepository private constructor(
     }
 
 
-
-
-
     companion object {
         private const val TAG = "NgaksoroRepository"
+
         @Volatile
         private var instance: NgaksoroRepository? = null
         fun getInstance(

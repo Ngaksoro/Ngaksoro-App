@@ -22,8 +22,8 @@
     <string name="belajar_activity">Modul Belajar</string>
     <string name="menulis_kuis_activity">Kuis Menulis</string>
     <string name="membaca_kuis_activity">Kuis Membaca</string>
-    
-<!--    TEXT Button -->
+
+    <!--    TEXT Button -->
     <string name="select_soal">Pilih Dahulu</string>
     <!--     TEXT HANACARAKA -->
     <string name="ha">Ha</string>

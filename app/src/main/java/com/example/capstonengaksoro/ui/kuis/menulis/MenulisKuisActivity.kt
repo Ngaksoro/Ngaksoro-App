@@ -180,11 +180,6 @@ class MenulisKuisActivity : AppCompatActivity() {
                 response?.let {
                     if (it.result != null) {
                         showProgresBar(false)
-                        Toast.makeText(
-                            this@MenulisKuisActivity,
-                            "Aksara Merupakan: ${it.result}",
-                            Toast.LENGTH_LONG
-                        ).show()
                         if (it.result.equals("true")) {
                             changeActivity(this, MenulisBenarActivity::class.java)
                             finish()

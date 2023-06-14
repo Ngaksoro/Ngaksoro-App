@@ -20,6 +20,7 @@ class MembacaKuisFinishActivity : AppCompatActivity() {
     private val viewModel: MembacaFinishViewModel by viewModels {
         factory
     }
+    private var nilaiQuiz: Double = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMembacaKuisFinishBinding.inflate(layoutInflater)
@@ -39,6 +40,7 @@ class MembacaKuisFinishActivity : AppCompatActivity() {
 
         viewModel.getNilai().observe(this) {nilai ->
             binding.tvJumlahNilai.text = nilai.toString()
+            nilaiQuiz = nilai
 
         }
 
@@ -47,7 +49,6 @@ class MembacaKuisFinishActivity : AppCompatActivity() {
             binding.tvJawabanBenar.text = benar.toInt().toString()
 
         }
-
 
 
 

@@ -1,10 +1,14 @@
 package com.example.capstonengaksoro.ui.kuis.membaca
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.capstonengaksoro.R
@@ -41,9 +45,11 @@ class MembacaKuisActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewModel.counterID.observe(this) { id ->
+            showProgressBar(true)
             viewModel.getSoal().observe(this) { responseSoalItems ->
                 if (responseSoalItems.isNotEmpty()) {
                     if (id <= responseSoalItems.size) {
+                        showProgressBar(false)
                         val currentSoal = responseSoalItems.firstOrNull { it.id == id }
                         binding.tvSoalNumber.text = "${id}/${responseSoalItems.size}"
                         currentSoal?.let { soal ->
@@ -63,7 +69,10 @@ class MembacaKuisActivity : AppCompatActivity() {
                         }
 
                     } else {
-                        viewModel.hitungNilai(jawabanBenar.toDouble(), 20.0).observe(this) {
+                        viewModel.hitungNilai(
+                            jawabanBenar.toDouble(),
+                            responseSoalItems.size.toDouble()
+                        ).observe(this) {
                             Log.d("MembacaKuisActivity", it.toString())
                         }
 
@@ -92,52 +101,163 @@ class MembacaKuisActivity : AppCompatActivity() {
         }
     }
 
-    fun koreksiSoal(jawaban: String) {
-        viewModel.isClicked.observe(this) { isClicked ->
-            if (!isClicked) {
-                binding.btnOption1.setOnClickListener {
-                    viewModel.setIsClicked(true)
-                    if (binding.btnOption1.text == jawaban) {
-                        Log.d("MembacaKuisActivity", "true")
-                        jawabanBenar++
-                    } else {
-                        Log.d("MembacaKuisActivity", "false")
-                    }
+    private fun koreksiSoal(jawaban: String) {
+        var isButtonClicked = false
+        originalButtonBGColor()
+
+        binding.btnOption1.setOnClickListener {
+            if (!isButtonClicked) {
+                isButtonClicked = true
+                viewModel.setIsClicked(true)
+                if (binding.btnOption1.text == jawaban) {
+                    Toast.makeText(
+                        this@MembacaKuisActivity,
+                        "Jawaban Benar",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.btnOption1.setBackgroundColor(Color.GREEN) // Set button background color to Green
+                    jawabanBenar++
+                } else {
+                    Toast.makeText(
+                        this@MembacaKuisActivity,
+                        "Jawaban Salah",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.btnOption1.setBackgroundColor(Color.RED) // Set button background color to red
                 }
-                binding.btnOption2.setOnClickListener {
-                    viewModel.setIsClicked(true)
-                    if (binding.btnOption2.text == jawaban) {
-                        Log.d("MembacaKuisActivity", "true")
-                        jawabanBenar++
-                    } else {
-                        Log.d("MembacaKuisActivity", "false")
-                    }
-                }
-                binding.btnOption3.setOnClickListener {
-                    viewModel.setIsClicked(true)
-                    if (binding.btnOption3.text == jawaban) {
-                        Log.d("MembacaKuisActivity", "true")
-                        jawabanBenar++
-                    } else {
-                        Log.d("MembacaKuisActivity", "false")
-                    }
-                }
-                binding.btnOption4.setOnClickListener {
-                    viewModel.setIsClicked(true)
-                    if (binding.btnOption4.text == jawaban) {
-                        Log.d("MembacaKuisActivity", "true")
-                        jawabanBenar++
-                    } else {
-                        Log.d("MembacaKuisActivity", "false")
-                    }
-                }
-            } else {
-                binding.btnNext.setOnClickListener {
-                    viewModel.incrementCounterID()
-                    viewModel.setIsClicked(false)
-                }
+                disableOptionButtons()
             }
         }
 
+        binding.btnOption2.setOnClickListener {
+            if (!isButtonClicked) {
+                isButtonClicked = true
+                viewModel.setIsClicked(true)
+                if (binding.btnOption2.text == jawaban) {
+                    Toast.makeText(
+                        this@MembacaKuisActivity,
+                        "Jawaban Benar",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.btnOption2.setBackgroundColor(Color.GREEN) // Set button background color to Green
+                    jawabanBenar++
+                } else {
+                    Toast.makeText(
+                        this@MembacaKuisActivity,
+                        "Jawaban Salah",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.btnOption2.setBackgroundColor(Color.RED) // Set button background color to Green
+                }
+                disableOptionButtons()
+            }
+        }
+
+        binding.btnOption3.setOnClickListener {
+            if (!isButtonClicked) {
+                isButtonClicked = true
+                viewModel.setIsClicked(true)
+                if (binding.btnOption3.text == jawaban) {
+                    Toast.makeText(
+                        this@MembacaKuisActivity,
+                        "Jawaban Benar",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    jawabanBenar++
+                    binding.btnOption3.setBackgroundColor(Color.GREEN) // Set button background color to Green
+                } else {
+                    Toast.makeText(
+                        this@MembacaKuisActivity,
+                        "Jawaban Salah",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.btnOption3.setBackgroundColor(Color.RED) // Set button background color to Green
+                }
+                disableOptionButtons()
+            }
+        }
+
+        binding.btnOption4.setOnClickListener {
+            if (!isButtonClicked) {
+                isButtonClicked = true
+                viewModel.setIsClicked(true)
+                if (binding.btnOption4.text == jawaban) {
+                    Toast.makeText(
+                        this@MembacaKuisActivity,
+                        "Jawaban Benar",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.btnOption4.setBackgroundColor(Color.GREEN) // Set button background color to Green
+                    jawabanBenar++
+                } else {
+                    Toast.makeText(
+                        this@MembacaKuisActivity,
+                        "Jawaban Salah",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.btnOption4.setBackgroundColor(Color.RED) // Set button background color to Green
+                }
+                disableOptionButtons()
+            }
+        }
+
+
+        binding.btnNext.setOnClickListener {
+            if (isButtonClicked) {
+                viewModel.incrementCounterID()
+                viewModel.setIsClicked(false)
+                originalButtonBGColor()
+                enableOptionButtons()
+                isButtonClicked = false
+            } else {
+                Toast.makeText(
+                    this@MembacaKuisActivity,
+                    getString(R.string.select_soal),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        }
     }
+
+    private fun disableOptionButtons() {
+        binding.btnOption1.isEnabled = false
+        binding.btnOption2.isEnabled = false
+        binding.btnOption3.isEnabled = false
+        binding.btnOption4.isEnabled = false
+    }
+
+    private fun enableOptionButtons() {
+        binding.btnOption1.isEnabled = true
+        binding.btnOption2.isEnabled = true
+        binding.btnOption3.isEnabled = true
+        binding.btnOption4.isEnabled = true
+    }
+
+    private fun originalButtonBGColor() {
+        val colorResId = R.color.cream_btn
+        val color = ContextCompat.getColor(this, colorResId)
+        binding.btnOption1.setBackgroundColor(color)
+        binding.btnOption2.setBackgroundColor(color)
+        binding.btnOption3.setBackgroundColor(color)
+        binding.btnOption4.setBackgroundColor(color)
+    }
+
+
+    private fun showProgressBar(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.optionsLayout.visibility = View.GONE
+            binding.btnNext.visibility = View.GONE
+            binding.image.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.optionsLayout.visibility = View.VISIBLE
+            binding.btnNext.visibility = View.VISIBLE
+            binding.image.visibility = View.VISIBLE
+        }
+
+    }
+
+
 }

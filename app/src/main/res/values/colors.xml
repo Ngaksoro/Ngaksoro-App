@@ -11,4 +11,6 @@
     <color name="cream">#FDDF81</color>
 
     <color name="cream_btn">#FFC60B</color>
+
+    <color name="disable_btn">#888784</color>
 </resources>

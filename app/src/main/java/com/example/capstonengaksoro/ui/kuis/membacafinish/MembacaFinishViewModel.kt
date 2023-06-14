@@ -14,7 +14,4 @@ class MembacaFinishViewModel(private val ngaksoroRepository: NgaksoroRepository)
         return ngaksoroRepository.jawabanBenar
     }
 
-//    fun hitungSoal() : LiveData<Double> {
-//        ngaksoroRepository.hitungNilai()
-//    }
 }

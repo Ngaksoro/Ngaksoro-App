@@ -46,9 +46,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //    Shared Pref
-    //    datastore Pref
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     //coroutine support
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0" //viewModelScope
@@ -71,7 +68,5 @@ dependencies {
 
     //    Lottie Animation
     implementation 'com.airbnb.android:lottie:6.0.0'
-
-
 
 }

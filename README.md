@@ -6,6 +6,6 @@
 
 Android Caspstone Project Ngaksoro
 
-#Description
+# Description
 
 Ngaksoro is a Android application developed using Kotlin and incorporating several modern architectural components and libraries such as Dependency Injection (DI), Retrofit, MVVM, and RecyclerView. The primary focus of Ngaksoro is to provide users with a seamless learning experience for Aksara Jawa, the traditional Javanese script, through interactive lessons and quizzes.

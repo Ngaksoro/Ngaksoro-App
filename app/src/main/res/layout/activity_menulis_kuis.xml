@@ -66,6 +66,7 @@
             android:layout_width="350dp"
             android:layout_height="300dp"
             android:layout_margin="16dp"
+            android:padding="16dp"
             android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
